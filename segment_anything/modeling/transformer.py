@@ -229,7 +229,7 @@ class Attention(nn.Module):
         # Attention
         _, _, _, c_per_head = q.shape
         attn = q @ k.permute(0, 1, 3, 2)  # B x N_heads x N_tokens x N_tokens
-        attn = attn / math.sqrt(c_per_head)
+        attn = attn / torch.sqrt(torch.tensor(c_per_head).float())
         attn = torch.softmax(attn, dim=-1)
 
         # Get output
